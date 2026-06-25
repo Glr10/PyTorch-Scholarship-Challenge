@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contáctanos</title>
+  <style>
+    :root {
+      --primario: #4f46e5;
+      --primario-oscuro: #4338ca;
+      --texto: #1f2937;
+      --gris: #6b7280;
+      --borde: #d1d5db;
+      --error: #dc2626;
+      --ok: #16a34a;
+      --fondo: #f3f4f6;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(135deg, #e0e7ff 0%, var(--fondo) 100%);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .tarjeta {
+      background: #fff;
+      width: 100%;
+      max-width: 520px;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      padding: 32px;
+    }
+
+    h1 { font-size: 1.6rem; margin-bottom: 4px; }
+    .subtitulo { color: var(--gris); margin-bottom: 24px; font-size: 0.95rem; }
+
+    .campo { margin-bottom: 18px; }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    label .req { color: var(--error); }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid var(--borde);
+      border-radius: 9px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primario);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    textarea { resize: vertical; min-height: 100px; }
+
+    .mensaje-error {
+      color: var(--error);
+      font-size: 0.8rem;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .campo.invalido input,
+    .campo.invalido select,
+    .campo.invalido textarea { border-color: var(--error); }
+
+    .campo.invalido .mensaje-error { display: block; }
+
+    button {
+      width: 100%;
+      background: var(--primario);
+      color: #fff;
+      border: none;
+      padding: 13px;
+      border-radius: 9px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover { background: var(--primario-oscuro); }
+
+    .exito {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .exito .check {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--ok);
+      color: #fff;
+      font-size: 2rem;
+      line-height: 64px;
+      margin: 0 auto 16px;
+    }
+
+    .exito h2 { margin-bottom: 8px; }
+    .exito p { color: var(--gris); }
+
+    .reiniciar {
+      margin-top: 20px;
+      background: transparent;
+      color: var(--primario);
+      border: 1px solid var(--primario);
+    }
+    .reiniciar:hover { background: #eef2ff; }
+  </style>
+</head>
+<body>
+  <div class="tarjeta">
+    <!-- Formulario -->
+    <form id="formulario" novalidate>
+      <h1>Contáctanos</h1>
+      <p class="subtitulo">Completa el formulario y nos pondremos en contacto contigo.</p>
+
+      <div class="campo">
+        <label for="nombre">Nombre completo <span class="req">*</span></label>
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" />
+        <span class="mensaje-error">Por favor ingresa tu nombre.</span>
+      </div>
+
+      <div class="campo">
+        <label for="email">Correo electrónico <span class="req">*</span></label>
+        <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" />
+        <span class="mensaje-error">Ingresa un correo válido.</span>
+      </div>
+
+      <div class="campo">
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" name="telefono" placeholder="+56 9 1234 5678" />
+        <span class="mensaje-error">Ingresa un teléfono válido.</span>
+      </div>
+
+      <div class="campo">
+        <label for="servicio">Servicio de interés <span class="req">*</span></label>
+        <select id="servicio" name="servicio">
+          <option value="">Selecciona una opción…</option>
+          <option value="consulta">Consulta general</option>
+          <option value="cotizacion">Cotización</option>
+          <option value="soporte">Soporte técnico</option>
+          <option value="otro">Otro</option>
+        </select>
+        <span class="mensaje-error">Selecciona un servicio.</span>
+      </div>
+
+      <div class="campo">
+        <label for="mensaje">Mensaje <span class="req">*</span></label>
+        <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos en qué podemos ayudarte…"></textarea>
+        <span class="mensaje-error">Escribe un mensaje (mínimo 10 caracteres).</span>
+      </div>
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <!-- Pantalla de éxito -->
+    <div class="exito" id="exito">
+      <div class="check">&#10003;</div>
+      <h2>¡Mensaje enviado!</h2>
+      <p>Gracias por contactarnos. Te responderemos pronto.</p>
+      <button class="reiniciar" id="reiniciar">Enviar otro mensaje</button>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("formulario");
+    const exito = document.getElementById("exito");
+    const reiniciar = document.getElementById("reiniciar");
+
+    // Marca un campo como inválido o válido
+    function setError(input, hayError) {
+      input.closest(".campo").classList.toggle("invalido", hayError);
+    }
+
+    function validarEmail(valor) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
+    }
+
+    function validarTelefono(valor) {
+      // Opcional: si está vacío es válido; si no, solo dígitos, espacios y + - ( )
+      if (valor.trim() === "") return true;
+      return /^[\d\s()+\-]{6,}$/.test(valor);
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nombre = form.nombre;
+      const email = form.email;
+      const telefono = form.telefono;
+      const servicio = form.servicio;
+      const mensaje = form.mensaje;
+
+      let valido = true;
+
+      setError(nombre, nombre.value.trim() === "");
+      if (nombre.value.trim() === "") valido = false;
+
+      setError(email, !validarEmail(email.value.trim()));
+      if (!validarEmail(email.value.trim())) valido = false;
+
+      setError(telefono, !validarTelefono(telefono.value));
+      if (!validarTelefono(telefono.value)) valido = false;
+
+      setError(servicio, servicio.value === "");
+      if (servicio.value === "") valido = false;
+
+      setError(mensaje, mensaje.value.trim().length < 10);
+      if (mensaje.value.trim().length < 10) valido = false;
+
+      if (!valido) return;
+
+      // Datos recopilados (aquí podrías enviarlos a un servidor o servicio externo)
+      const datos = {
+        nombre: nombre.value.trim(),
+        email: email.value.trim(),
+        telefono: telefono.value.trim(),
+        servicio: servicio.value,
+        mensaje: mensaje.value.trim(),
+      };
+      console.log("Datos del formulario:", datos);
+
+      // Mostrar pantalla de éxito
+      form.style.display = "none";
+      exito.style.display = "block";
+    });
+
+    reiniciar.addEventListener("click", function () {
+      form.reset();
+      form.querySelectorAll(".campo").forEach((c) => c.classList.remove("invalido"));
+      form.style.display = "block";
+      exito.style.display = "none";
+    });
+  </script>
+</body>
+</html>
